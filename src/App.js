@@ -6,6 +6,8 @@
 /* "google-maps-react" package. The Google Fusion Table layer provided by
 /* Sharon Machlis, using Cartographic Boundary KML Files to denote district
 /* boundaries taken from the United States Census Bureau on the 115th Congress.
+/* Fusion Table Layer functionality based on Tom Chen's "react-google-maps"
+/* package.
 *******************************************************************************/
 
 import React, { Component } from 'react';
@@ -18,6 +20,8 @@ import ReactDOM from 'react-dom'
 
 // Google Maps API Key from FullstackReact
 const gAPIKey = 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
+// Fusion Table ID from Sharon Machlis
+const ftID = '1YR6Oe72NnBYAG3_Ezzg3jaq3R69u4rdvyUZ7fxUZ';
 
 // MapContainer component
 export class MapContainer extends Component {
@@ -60,8 +64,8 @@ export class MapContainer extends Component {
         <Map className="App-map"
           google={this.props.google}
           initialCenter={{
-            lat: 39.8283,
-            lng: -98.5795
+            lat : 39.8283,
+            lng : -98.5795
           }}
           zoom={5}>
         </Map>
@@ -72,5 +76,5 @@ export class MapContainer extends Component {
 
 // Export High-Order Component (HOC) with GoogleAPIWrapper using API key
 export default GoogleApiWrapper({
-  apiKey : gAPIKey
+  apiKey : gAPIKey,
 }) (MapContainer)
