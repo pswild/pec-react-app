@@ -14,9 +14,11 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 // Import Google Maps API Wrapper
-import { Map, GoogleApiWrapper } from 'google-maps-react'
+import { Map, GoogleApiWrapper } from 'google-maps-react';
+// Import Google Fusion Tables Layer Wrapper
+// import { GoogleMap, FusionTablesLayer } from "react-google-maps";
 // Import React DOM
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom';
 
 // Google Maps API Key from FullstackReact
 const gAPIKey = 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
@@ -47,8 +49,12 @@ export class MapContainer extends Component {
   //     // Reference to DOM component where map is placed
   //     const mapRef = this.refs.map;
   //     const node = ReactDOM.findDOMNode(mapRef);
+  //
+  //
   //   }
   // }
+
+  
 
   render() {
     if (!this.props.loaded) {
@@ -61,7 +67,8 @@ export class MapContainer extends Component {
           <h1 className="App-title">Welcome to the Princeton Election Consortium</h1>
           <p className="App-subtitle">Featuring an interactive React component to identifies competitive congressional districts for the 2018 midterm elections.</p>
         </header>
-        <Map className="App-map"
+        <Map
+          className="App-map"
           google={this.props.google}
           initialCenter={{
             lat : 39.8283,
