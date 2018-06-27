@@ -13,13 +13,43 @@ import logo from './logo.svg';
 import './App.css';
 // Import Google Maps API Wrapper
 import { Map, GoogleApiWrapper } from 'google-maps-react'
+// Import React DOM
+import ReactDOM from 'react-dom'
 
 // Google Maps API Key from FullstackReact
-const googleMapsAPIKey = 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
+const gAPIKey = 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
 
 // MapContainer component
 export class MapContainer extends Component {
+
+  // // Updates Google API map when component updated
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.google !== this.props.google) {
+  //     this.loadMap();
+  //   }
+  // }
+  // componentDidMount() {
+  //   this.loadMap();
+  // }
+  //
+  // // Called after component has been rendered
+  // loadMap() {
+  //   // Confirm Google API is available
+  //   if (this.props && this.props.google) {
+  //     // Sets props to Google Map
+  //     const {google} = this.props;
+  //     const maps = google.maps;
+  //
+  //     // Reference to DOM component where map is placed
+  //     const mapRef = this.refs.map;
+  //     const node = ReactDOM.findDOMNode(mapRef);
+  //   }
+  // }
+
   render() {
+    if (!this.props.loaded) {
+      return <div>Loading...</div>
+    }
     return (
       <div className="App">
         <header className="App-header">
@@ -27,8 +57,13 @@ export class MapContainer extends Component {
           <h1 className="App-title">Welcome to the Princeton Election Consortium</h1>
           <p className="App-subtitle">Featuring an interactive React component to identifies competitive congressional districts for the 2018 midterm elections.</p>
         </header>
-        <Map className="App-map" google={this.props.google} zoom={14}>
-          
+        <Map className="App-map"
+          google={this.props.google}
+          initialCenter={{
+            lat: 39.8283,
+            lng: -98.5795
+          }}
+          zoom={5}>
         </Map>
       </div>
     );
@@ -37,5 +72,5 @@ export class MapContainer extends Component {
 
 // Export High-Order Component (HOC) with GoogleAPIWrapper using API key
 export default GoogleApiWrapper({
-  apiKey : googleMapsAPIKey
+  apiKey : gAPIKey
 }) (MapContainer)
