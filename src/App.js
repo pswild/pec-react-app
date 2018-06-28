@@ -41,15 +41,14 @@ export class Map extends React.Component {
 
   // Place a marker
   mark() {
-    // Sets props to Google and Google Maps
+    // Sets props to Google
     const google = this.props.google;
-    const maps = google.maps;
 
     // Place marker at coordinates
     const coords = this.state.currentLocation;
-    var marker = new google.maps.Marker({
-      position: coords,
-      map: this.map
+    new google.maps.Marker({
+      position : coords,
+      map : this.map
     });
 
     // Pan to coordinates
