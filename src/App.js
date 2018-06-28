@@ -46,13 +46,13 @@ export class Map extends React.Component {
 
     // Place marker at coordinates
     const coords = this.state.currentLocation;
-    new google.maps.Marker({
+    var marker = new google.maps.Marker({
       position : coords,
       map : this.map
     });
 
     // Pan to coordinates
-    this.map.panTo(coords);
+    this.map.panTo(marker.position);
     this.map.setZoom(10);
   }
 
