@@ -48,7 +48,15 @@ export class Map extends React.Component {
     const coords = this.state.currentLocation;
     var marker = new google.maps.Marker({
       position : coords,
-      map : this.map
+      map : this.map,
+      animation: google.maps.Animation.DROP
+    });
+    // Open title
+    var title = new google.maps.InfoWindow({
+      content : "<h3>Current location</h3>"
+    });
+    marker.addListener('click', function() {
+      title.open(this.map, marker);
     });
 
     // Pan to coordinates
@@ -111,7 +119,7 @@ export class Map extends React.Component {
       // Create new map
       this.map = new maps.Map(node, mapConfig);
 
-      // Add Fusion Tables Layer
+      // Add Fusion Tables Layer, filter for competitive districts
       var layer = new google.maps.FusionTablesLayer({
         query : {
           select : 'geometry',
@@ -124,6 +132,16 @@ export class Map extends React.Component {
           }
         }]
       });
+      // Customize map info windows
+      var contentString = '<div class="googft-info-window">' +
+        '<b>District: </b>' +
+        '<a>Import FT data for each district here.</a>' +
+        '</div>'
+      var infowindow = new google.maps.InfoWindow({
+        content : contentString
+      });
+
+      // Set the map
       layer.setMap(this.map);
     }
   }
@@ -156,7 +174,7 @@ export class MapContainer extends React.Component {
           <p className="App-subtitle">Featuring an interactive React component to identifies competitive congressional districts for the 2018 midterm elections.</p>
         </header>
         <div>
-          <Map google={this.props.google}></Map>
+          <Map google={this.props.google} onClick={this.onMapClicked}></Map>
         </div>
       </div>
     );
